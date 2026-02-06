@@ -75,7 +75,7 @@ timeout during the handshake (see TLS post-quantum TL;DR fail).
 
 Q: What part of the code enables enables this default behavior?
 
-At current Golang Master, the part of the code enabling this default selection, 
+At current Golang Master, the part of the code enabling this default selection
 appears to be located here: [Link to crypto/tls/defaults.go](https://github.com/golang/go/blob/e2a34c7e9b04564ddad50bd7ec7b52fabde74192/src/crypto/tls/defaults.go#L21C1-L35C1)
 
 ```golang
