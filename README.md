@@ -1,14 +1,15 @@
 # README
 
-The purpose of this repo is to try out Golang 1.25's default PQC settings.
+The purpose of this repo is to try out Golang 1.25's default PQC settings 
+in an HTTPS server.
 
-Notice that this is only using PQC algorithms for key exchange, 
+Notice that this is only testing the use of PQC algorithms for key exchange, 
 and not for certificates. The self-signed cert used for the tests
 here are still your usual RSA-based x509 cert.
 
 ## Quick Start
 
-This repo defines a simple docker image, built on golang:1.25-bookworm.
+This repo defines a simple docker image built on `golang:1.25-bookworm`.
 
 I'm using docker-compose here because it simplifies port-forwarding between the host and guest.
 
