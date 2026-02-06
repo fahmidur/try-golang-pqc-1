@@ -57,3 +57,41 @@ a PQC hybrid curve is being used.
 Feel free to test with other browsers and other HTTPS clients. 
 
 
+## FAQ
+
+Q: When did Golang start using PQC Curves by default?
+
+The change seems to have occurred at [Go v1.24](https://go.dev/doc/go1.24).
+See this highlighted part of the release notes:
+
+```
+The new post-quantum X25519MLKEM768 key exchange mechanism is now supported
+and is enabled by default when Config.CurvePreferences is nil. GODEBUG
+setting tlsmlkem=0 reverts the default. This can be useful when dealing with
+buggy TLS servers that do not handle large records correctly, causing a
+timeout during the handshake (see TLS post-quantum TL;DR fail).
+```
+
+Q: What part of the code enables enables this default behavior?
+
+At current Golang Master, the part of the code enabling this default selection, 
+appears to be located here: [Link to crypto/tls/defaults.go](https://github.com/golang/go/blob/e2a34c7e9b04564ddad50bd7ec7b52fabde74192/src/crypto/tls/defaults.go#L21C1-L35C1)
+
+```golang
+func defaultCurvePreferences() []CurveID {
+	switch {
+	// tlsmlkem=0 restores the pre-Go 1.24 default.
+	case tlsmlkem.Value() == "0":
+		return []CurveID{X25519, CurveP256, CurveP384, CurveP521}
+	// tlssecpmlkem=0 restores the pre-Go 1.26 default.
+	case tlssecpmlkem.Value() == "0":
+		return []CurveID{X25519MLKEM768, X25519, CurveP256, CurveP384, CurveP521}
+	default:
+		return []CurveID{
+			X25519MLKEM768, SecP256r1MLKEM768, SecP384r1MLKEM1024,
+			X25519, CurveP256, CurveP384, CurveP521,
+		}
+	}
+}
+```
+
