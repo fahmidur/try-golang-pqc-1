@@ -5,7 +5,7 @@ in an HTTPS server.
 
 Notice that this is only testing the use of PQC algorithms for key exchange, 
 and not for certificates. The self-signed cert used for the tests
-here are still your usual RSA-based x509 cert.
+here is still your usual RSA-based x509 cert.
 
 ## Quick Start
 
@@ -73,7 +73,7 @@ buggy TLS servers that do not handle large records correctly, causing a
 timeout during the handshake (see TLS post-quantum TL;DR fail).
 ```
 
-Q: What part of the code enables enables this default behavior?
+Q: What part of the code enables this default behavior?
 
 At current Golang Master, the part of the code enabling this default selection
 appears to be located here: [Link to crypto/tls/defaults.go](https://github.com/golang/go/blob/e2a34c7e9b04564ddad50bd7ec7b52fabde74192/src/crypto/tls/defaults.go#L21C1-L35C1)
