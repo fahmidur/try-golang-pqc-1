@@ -1,6 +1,6 @@
 # README
 
-The purpose of this repo is to try out Golang 1.25's default PQC settings 
+The purpose of this repo is to try out Golang v1.25's default PQC settings 
 in an HTTPS server.
 
 Notice that this is only testing the use of PQC algorithms for key exchange, 
